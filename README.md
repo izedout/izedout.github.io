@@ -13,3 +13,5 @@ Current objectives:
   - Light mode?
 - Actual site layout beyond playing a few of my songs
   - Maybe I should work out what my purpose of the site is before I try and make it gud :///
+- Change speed of rotation based on track BPM
+- Reactive WebGL based on audio
