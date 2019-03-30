@@ -1,13 +1,16 @@
+
+
 ::-webkit-scrollbar { 
     display: none; 
 }
 
 body {
-	font-family: Monospace;
+	font-family: "Roboto";
 	background-color: #000;
 	color: #fff;
 	margin: 0px;
 	overflow: hidden;
+    font-family: 'Roboto', sans-serif;
 }
 
 #flex-container{
@@ -26,6 +29,7 @@ body {
     z-index: 5;
     color: white;
 	text-align:center;
+	
 }
 
 .p{
@@ -47,3 +51,10 @@ body {
   align-items: center;
   justify-content: center;
 }
+
+p { 
+  mix-blend-mode: screen; 
+}  
+script { 
+  mix-blend-mode: screen; 
+}  
