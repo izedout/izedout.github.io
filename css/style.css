@@ -24,11 +24,26 @@ body {
 .level1{
     position: absolute;
     z-index: 5;
-    color: white;    
+    color: white;
+	text-align:center;
+}
+
+.p{
+    test-align: center;
+   
 }
 
 .header{
     width: 100%;
     display: inline-block;
     text-align: center;
+}
+
+.centercontainer {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  position: fixed;
+  align-items: center;
+  justify-content: center;
 }
