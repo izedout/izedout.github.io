@@ -1,7 +1,0 @@
-<iframe>
-
-		<script src="/izedresources/js/three.js"></script>
-		<script src="/izedresources/js/loaders/OBJLoader.js"></script>
-		<script src="izedresources/js/izedthree.js></script>
-
-</iframe>
