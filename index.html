@@ -9,10 +9,36 @@
 	</head>
 
 	<body>
-		<div id="level1" style="z-index:5;position: absolute;text-align:center;mix-blend-mode: difference;" class="centercontainer">
-			<p style="position: absolute;display: inline-block;font-size:400px;">ized</p>
+		<div id="level2">
+			<audio id="myAudio" preload="none">
+				<source src="music/from ized to pegly.mp3" type="audio/mpeg" />
+			</audio>
+			
+			<a href="#" id="audioControl">playyy</a>
+			
+			<script>
+				var yourAudio = document.getElementById('myAudio'),
+					ctrl = document.getElementById('audioControl');
+
+				ctrl.onclick = function () {
+
+					// Update the Button
+					var pause = ctrl.innerHTML === 'pause!';
+					ctrl.innerHTML = pause ? 'play!' : 'pause!';
+
+					// Update the Audio
+					var method = pause ? 'pause' : 'play';
+					myAudio[method]();
+
+					// Prevent Default Action
+					return false;
+				};
+			</script>
 		</div>
-	
+		
+		<div id="level1" style="z-index:5;position: absolute;text-align:center;mix-blend-mode: difference;" class="centercontainer">
+			<p style="position: absolute;display: inline-block;font-size:400px;width:100%;">ized</p>
+		</div>
 		<div id="level0" style="z-index:2;position: absolute;mix-blend-mode: difference;">
 			<script src="js/three.js"></script>
 			<script src="js/loaders/OBJLoader.js"></script>
@@ -165,6 +191,8 @@
 
 		</script>
 		</div>
+		
+		
 		
 	</body>
 </html>
