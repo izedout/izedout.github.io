@@ -49,20 +49,17 @@
 						
 			<script>
 				var yourAudio = document.getElementById('myAudio'),
-					ctrl = document.getElementById('button');
+					ctrl = document.getElementById('button'),
+					isPlaying = false;
 
 				ctrl.onclick = function () {
-
-					// Update the Button
-					var pause = ctrl.innerHTML === '=';
-					ctrl.innerHTML = pause ? '>' : '=';
-
-					// Update the Audio
-					var method = pause ? 'pause' : 'play';
-					myAudio[method]();
-
-					// Prevent Default Action
-					return false;
+					if (isPlaying) {
+					yourAudio.pause();
+					isPlaying = false;
+					} else {
+					yourAudio.play();
+					isPlaying = true;
+					}
 				};
 			</script>
 		</div>
