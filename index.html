@@ -9,11 +9,12 @@
 	</head>
 
 	<body>
-		
+		<!-- Audio -->
 		<audio id="myAudio" preload="none">
 			<source src="music/from ized to pegly.mp3" type="audio/mpeg" />
 		</audio>
 		
+		<!-- Clickable Layer -->
 		<div id="level2" style="z-index:10;position:absolute;width:100%;height:100%;align-items:center;mix-blend-mode: difference;">
 			<a href="#" id="button">
 				<div style="height:100%;width:100%;display:block;" >
@@ -21,13 +22,13 @@
 			</a>
 		</div>
 		
-		
-		<div id="level1" style="z-index:5;position: absolute;text-align:center;mix-blend-mode: difference;" class="centercontainer">
-			<p style="position: absolute;display: inline-block;font-size:40vw;width:100%;">ized</p>
+		<!-- Text Layer -->
+		<div id="level1" class="centercontainer">
+			<p style="font-size:40vw;">ized</p>
 		</div>
-		<div id="level0" style="z-index:2;position: absolute;">
 		
-
+		<!-- Three.js Layer -->
+		<div id="level0" style="z-index:2;position: absolute;">
 			<script src="js/three.js"></script>
 			<script src="js/loaders/OBJLoader.js"></script>
 			<script src="js/main.js"></script>
