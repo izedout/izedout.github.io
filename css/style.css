@@ -50,4 +50,32 @@ p {
   mix-blend-mode: screen; 
 }  
 
+.button {
+  border: none;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+  background-color: #1e1e1e;
+  color: #b2b2b2;
+  border: 2px solid #b2b2b2;
+}
 
+.button:hover {
+  background-color: #000000;
+  color: white;
+}
+
+.volup:hover {
+  border: 2px solid #FFFFFF;
+}
+
+.voldown:hover {
+  border: 2px solid #000000;
+
+}
