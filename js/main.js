@@ -34,8 +34,8 @@ function init() {
 	container = document.createElement( 'div' );
 	document.body.appendChild( container );
 
-	camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 2000 );
-	camera.position.z = 20;
+	camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 1, 2000 );
+	camera.position.z = 10;
 
 	// scene
 
@@ -94,7 +94,7 @@ function init() {
 
 	var loader = new THREE.OBJLoader( manager );
 
-	loader.load( 'models/obj/ized nobrain.obj', function ( obj ) {
+	loader.load( 'models/obj/low poly brain only.obj', function ( obj ) {
 
 		object = obj;
 
