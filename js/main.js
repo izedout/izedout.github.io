@@ -18,8 +18,6 @@ var container;
 
 var camera, scene, renderer;
 
-var mouseX = 0, mouseY = 0;
-
 var windowHalfX = window.innerWidth / 2;
 var windowHalfY = window.innerHeight / 2;
 
@@ -128,15 +126,7 @@ function onWindowResize() {
 
 }
 
-function onDocumentMouseMove( event ) {
-
-	mouseX = ( event.clientX - windowHalfX ) / 2;
-	mouseY = ( event.clientY - windowHalfY ) / 2;
-
-}
-
 //
-
 function animate() {
 	requestAnimationFrame( animate );
 	render();
