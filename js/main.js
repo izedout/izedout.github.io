@@ -26,6 +26,7 @@ var object;
 init();
 animate();
 
+//Initializes three canvas - doesnt loop
 
 function init() {
 
@@ -76,7 +77,7 @@ function init() {
 	var texture = textureLoader.load( 'textures/UV_Grid_Sm.jpg' );
 
 	// model
-
+	//loading bar in console
 	function onProgress( xhr ) {
 
 		if ( xhr.lengthComputable ) {
@@ -114,6 +115,7 @@ function init() {
 
 }
 
+// Window resize response
 function onWindowResize() {
 
 	windowHalfX = window.innerWidth / 2;
@@ -126,16 +128,50 @@ function onWindowResize() {
 
 }
 
-//
+// Animate
 function animate() {
 	requestAnimationFrame( animate );
 	render();
 
 }
 
+const context = new AudioContext();
+let src = context.createMediaElementSource(yourAudio);
+const analyser = context.createAnalyser();
+
+src.connect(analyser);
+analyser.connect(context.destination);
+
+// Number of frequncy ranges (bars)
+analyser.fftSize = 32;
+
+function renderAudioStats(){
+	
+	const bufferLength = analyser.frequencyBinCount;
+	const dataArray = new Uint8Array(bufferLength);
+	//console.log('DATA-ARRAY: ', dataArray)
+
+	// CALL THIS TO GET NEW VOLUME LEVEL
+	analyser.getByteFrequencyData(dataArray);
+	//console.log(dataArray);
+	
+	const sum = dataArray.reduce((a, b) => a + b, 0);
+	var scalar = sum / dataArray.length;
+	//console.log(scalar);
+	
+	object.scale.setScalar(scalar * 0.05)
+
+	
+	requestAnimationFrame(renderAudioStats);
+};
+
+// Render (loops)
 function render() {
 
+	requestAnimationFrame(renderAudioStats);
+	
 	if (isPlaying) {
+				
 		var x = camera.position.x;
 		var z = camera.position.z;
 	
