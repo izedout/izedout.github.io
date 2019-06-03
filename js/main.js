@@ -29,7 +29,7 @@ animate();
 //Initializes three canvas - doesnt loop
 
 function init() {
-
+	
 	container = document.createElement( 'div' );
 	document.body.appendChild( container );
 
@@ -113,7 +113,7 @@ function init() {
 
 	window.addEventListener( 'resize', onWindowResize, false );
 
-}
+};
 
 // Window resize response
 function onWindowResize() {
@@ -126,14 +126,16 @@ function onWindowResize() {
 
 	renderer.setSize( window.innerWidth, window.innerHeight );
 
-}
+};
 
-// Animate
+// Animate (loops)
 function animate() {
 	requestAnimationFrame( animate );
 	render();
 
-}
+};
+
+// AUDIO FUNCTION
 
 const context = new AudioContext();
 let src = context.createMediaElementSource(yourAudio);
@@ -145,30 +147,51 @@ analyser.connect(context.destination);
 // Number of frequncy ranges (bars)
 analyser.fftSize = 32;
 
+var currentScalar = 0;
+var newScalar = 0;
+//var bufferLength;
+
 function renderAudioStats(){
 	
-	const bufferLength = analyser.frequencyBinCount;
-	const dataArray = new Uint8Array(bufferLength);
+	var bufferLength = analyser.frequencyBinCount;
+	var dataArray = new Uint8Array(bufferLength);
 	//console.log('DATA-ARRAY: ', dataArray)
 
 	// CALL THIS TO GET NEW VOLUME LEVEL
 	analyser.getByteFrequencyData(dataArray);
 	//console.log(dataArray);
 	
-	const sum = dataArray.reduce((a, b) => a + b, 0);
-	var scalar = sum / dataArray.length;
-	//console.log(scalar);
+	// Gets average volume accross all frequencies (value between 0 and 255)
+	var sum = dataArray.reduce((a, b) => a + b, 0);
+	var newScalar = sum / dataArray.length;
 	
-	object.scale.setScalar(scalar * 0.05)
+	//Reduces volume scalar to a value between 0 and 1 for BezierEasing to process
+	
+	newScalar = (newScalar / 255);
+	//currentScalar = currentScalar / 255; //shouldnt be needed as last value was already divided by 255
+	
+	// SHOULD be updating scalar variable to smoothly change towards the newscalar variable
+	var easing = ((currentScalar + newScalar) / 2);
+	
+	// grabs value from Bezier curve and prepares it for use to scale object
+	var processedEasing = (easing + 1);
+	object.scale.setScalar(processedEasing);
 
+	// Resets currentScalar value for next iteration
+	currentScalar = newScalar;
 	
+	// Calls function every frame
 	requestAnimationFrame(renderAudioStats);
 };
 
 // Render (loops)
 function render() {
 
+	// Calls Audio Visualization Function every frame
 	requestAnimationFrame(renderAudioStats);
+	
+	//object.scale.setScalar(scalar * 0.05);
+
 	
 	if (isPlaying) {
 				
@@ -182,4 +205,4 @@ function render() {
 	};
 	renderer.render( scene, camera );
 
-}
+};
