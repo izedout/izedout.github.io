@@ -162,8 +162,10 @@ function renderAudioStats(){
 	//console.log(dataArray);
 	
 	// Gets average volume accross all frequencies (value between 0 and 255)
-	var sum = dataArray.reduce((a, b) => a + b, 0);
-	var newScalar = sum / dataArray.length;
+	//var sum = dataArray.reduce((a, b) => a + b, 0);
+	//var newScalar = sum / dataArray.length;
+	
+	var newScalar = dataArray[1];
 	
 	//Reduces volume scalar to a value between 0 and 1 for BezierEasing to process
 	
@@ -171,14 +173,14 @@ function renderAudioStats(){
 	//currentScalar = currentScalar / 255; //shouldnt be needed as last value was already divided by 255
 	
 	// SHOULD be updating scalar variable to smoothly change towards the newscalar variable
-	var easing = ((currentScalar + newScalar) / 2);
+	//var easing = ((currentScalar + newScalar) / 2);
 	
 	// grabs value from Bezier curve and prepares it for use to scale object
-	var processedEasing = (easing + 1);
+	var processedEasing = (newScalar + 0.5);
 	object.scale.setScalar(processedEasing);
-
+	bruh;
 	// Resets currentScalar value for next iteration
-	currentScalar = newScalar;
+	//currentScalar = newScalar;
 	
 	// Calls function every frame
 	requestAnimationFrame(renderAudioStats);
