@@ -72,9 +72,9 @@ function init() {
 
 	// texture
 
-	var textureLoader = new THREE.TextureLoader( manager );
-
-	var texture = textureLoader.load( 'textures/UV_Grid_Sm.jpg' );
+	//To texture in future:
+	//var textureLoader = new THREE.TextureLoader( manager );
+	//var texture = textureLoader.load( 'textures/UV_Grid_Sm.jpg' );
 
 	// model
 	//loading bar in console
@@ -105,9 +105,6 @@ function init() {
 	renderer.setPixelRatio( window.devicePixelRatio );
 	renderer.setSize( window.innerWidth, window.innerHeight );
 	container.appendChild( renderer.domElement );
-
-	//document.addEventListener( 'mousemove', onDocumentMouseMove, false );
-	//document.addEventListener( 'timeadvance', getMilliseconds(), 0 );
 
 	//
 
@@ -154,8 +151,6 @@ analyser.fftSize = 32;
 
 var currentScalar = 0,
 	newScalar = 0;
-//var bufferLength;
-
 
 function renderAudioStats(){
 	
@@ -164,22 +159,12 @@ function renderAudioStats(){
 
 	// CALL THIS TO GET NEW VOLUME LEVEL
 	analyser.getByteFrequencyData(dataArray);
-	//console.log(dataArray);
-	
-	// Gets average volume accross all frequencies (value between 0 and 255)
-	//var sum = dataArray.reduce((a, b) => a + b, 0);
-	//var newScalar = sum / dataArray.length;
-	
+		
 	var newScalar = dataArray[2] + dataArray[12],
-		//newScalar = newScalar / 2,
 	//Reduces volume scalar to a value between 0 and 1 for BezierEasing to process
 		newScalar = (newScalar / 255);
-	
-	// SHOULD be updating scalar variable to smoothly change towards the newscalar variable
-	//var easing = ((currentScalar + newScalar) / 2);
-	
-	// grabs value from Bezier curve and prepares it for use to scale object
-	// So scale is never below 1 or greater than 3
+		
+	// Prepares scalar for use, so scale is never below 0.5 or greater than 2.5
 	var processedEasing = (newScalar + 0.5);
 	
 	if (processedEasing > 1.5) {
@@ -187,11 +172,6 @@ function renderAudioStats(){
 	} else {
 		object.scale.setScalar(1);
 	}
-
-	//object.scale.setScalar(processedEasing);
-	//thisisnotavalidfunctionandthatisoke;
-	// Resets currentScalar value for next iteration
-	//currentScalar = newScalar;
 	
 	// Calls function every frame
 	requestAnimationFrame(renderAudioStats);
