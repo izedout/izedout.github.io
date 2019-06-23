@@ -3,6 +3,7 @@ var yourAudio = document.getElementById('myAudio'),
 	isPlaying = false;
 
 ctrl.onclick = function () {
+	context.resume();
 	if (isPlaying) {
 		yourAudio.pause();
 		isPlaying = false;
@@ -155,6 +156,7 @@ var currentScalar = 0,
 	newScalar = 0;
 //var bufferLength;
 
+
 function renderAudioStats(){
 	
 	var bufferLength = analyser.frequencyBinCount;
@@ -179,7 +181,6 @@ function renderAudioStats(){
 	// grabs value from Bezier curve and prepares it for use to scale object
 	// So scale is never below 1 or greater than 3
 	var processedEasing = (newScalar + 0.5);
-	let fail = 1;
 	
 	if (processedEasing > 1.5) {
 		object.scale.setScalar(processedEasing * 1.5);
