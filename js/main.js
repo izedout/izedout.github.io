@@ -1,3 +1,6 @@
+import * as THREE from './three.module.js';
+import { GLTFLoader } from './loaders/GLTFLoader.js';
+
 var yourAudio = document.getElementById('myAudio'),
 	ctrl = document.getElementById('button'),
 	isPlaying = false;
@@ -63,18 +66,11 @@ function init() {
 	}
 
 	var manager = new THREE.LoadingManager( loadModel );
-
 	manager.onProgress = function ( item, loaded, total ) {
 
 		console.log( item, loaded, total );
 
 	};
-
-	// texture
-
-	var textureLoader = new THREE.TextureLoader( manager );
-
-	var texture = textureLoader.load( 'textures/UV_Grid_Sm.jpg' );
 
 	// model
 	//loading bar in console
@@ -91,11 +87,15 @@ function init() {
 
 	function onError() {}
 
-	var loader = new THREE.OBJLoader( manager );
+	var loader = new THREE.GLTFLoader( manager );
 
-	loader.load( 'models/obj/low poly brain only.obj', function ( obj ) {
+	loader.load( 'models/low poly brain only.glb', function ( gltf ) {
 
-		object = obj;
+		scene.add( gltf.scene );
+	
+		gltf.animations;
+		gltf.asset;
+		object = gltf;
 
 	}, onProgress, onError );
 
