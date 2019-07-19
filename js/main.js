@@ -40,7 +40,7 @@ function init() {
 
 	scene = new THREE.Scene();
 
-	var ambientLight = new THREE.AmbientLight( 0xcccccc, 0.4 );
+	var ambientLight = new THREE.AmbientLight( 0xcccccc, 10 );
 	scene.add( ambientLight );
 
 	var pointLight = new THREE.PointLight( 0xffffff, 0.8 );
@@ -54,11 +54,16 @@ function init() {
 		object.traverse( function ( child ) {
 
 			if ( child.isMesh ) child.material.map = texture;
+			if ( child instanceof THREE.Mesh ) {
+				child.material.emissive.setHex(0xFFFFFF);
+                child.material.color.setHex(0xFFFFFF);
+			}
 
 		} );
 
 		object.position.y = 0;
 		scene.add( object );
+
 
 	}
 
@@ -93,7 +98,7 @@ function init() {
 
 	var loader = new THREE.OBJLoader( manager );
 
-	loader.load( 'models/obj/low poly brain only.obj', function ( obj ) {
+	loader.load( 'models/obj/low poly brain SOON.obj', function ( obj ) {
 
 		object = obj;
 
