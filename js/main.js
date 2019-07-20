@@ -1,6 +1,11 @@
 var yourAudio = document.getElementById('myAudio'),
 	ctrl = document.getElementById('button'),
-	isPlaying = false;
+	isPlaying = false,
+	volume = document.getElementById('volume');
+
+volume.addEventListener('input', function(){
+	yourAudio.volume = this.value;
+});
 
 ctrl.onclick = function () {
 	context.resume();
